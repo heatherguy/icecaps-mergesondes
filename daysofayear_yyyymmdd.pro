@@ -5,7 +5,7 @@ pro daysofayear_yyyymmdd,yyyy,daysoftheyear
 
 jan = long(findgen(31)) + 101l + yyyy*10000l
 if yyyy eq 2012 or yyyy eq 2008 or yyyy eq 2004 $
-  or yyyy eq 2016 then $
+  or yyyy eq 2016 or yyyy eq 2020 then $
   feb = long(findgen(29)) + 201l + yyyy*10000l else $
   feb = long(findgen(28)) + 201l + yyyy*10000l
 mar = long(findgen(31)) + 301l + yyyy*10000l
