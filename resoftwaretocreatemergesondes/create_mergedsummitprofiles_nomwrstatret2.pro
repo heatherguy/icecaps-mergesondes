@@ -193,7 +193,8 @@ if keyword_set(mtemp_interp) eq 0 then print, 'no file created for this day' els
 
 ;next merge in the MWRSTATRET data and the MWRRET data. 
 ;find the mwrstatret files around that day
-mfiles = file_search('/psd3data/arctic/summit/mwr/mwrstattempret/smtmwrprof1millX1*.cdf',count=mcount)
+;mfiles = file_search('/psd3data/arctic/summit/mwr/mwrstattempret/smtmwrprof1millX1*.cdf',count=mcount)
+mfiles = file_search('/gws/nopw/j04/ncas_radar_vol1/heather/mwroe/smt10mwroe1turnC1.d1.*.cdf',count=mcount)
 
 mtime=strmid(mfiles,64,15)
 ;get the time components. year,month,day, hour, min
@@ -370,7 +371,7 @@ endif
 ;find the mwrret files around that day
 ;rfiles = file_search('/psd3data/arctic/summit/mwr/mwrret/smtmwrret2turn*.cdf',count=rcount)
 ;rfiles = file_search('/psd3data/nmiller/MWRRET_TKC_3ch/smtmwrret2turn*.cdf',count=rcount)
-rfiles = file_search('/psd3data/nmiller/MWRRET_TKC_3ch/smtmwrret3turn*.cdf',count=rcount)
+rfiles = file_search('/gws/nopw/j04/ncas_radar_vol1/heather/mwrret3/smtmwrret3turn*.cdf',count=rcount)
 
 ;rtime=strmid(rfiles,55,15)
 rtime=strmid(rfiles,53,15)
