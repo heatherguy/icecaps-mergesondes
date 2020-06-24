@@ -29,8 +29,8 @@ openr,2,'b_coeff_after20130625'
 readf,2,b
 close,2
 
-efiles = file_search('/psd3data/arctic/summit/ecmwf/ecmwf_oper_*12to36_greenlandsummitarea_ml.nc')
-esfiles = file_search('/psd3data/arctic/summit/ecmwf/ecmwf_oper_*12to36_greenlandsummitarea_sl.nc')
+efiles = file_search('/gws/nopw/j04/ncas_radar_vol2/data/ICECAPSarchive/ecmwf/ecmwf_oper_*12to36_greenlandsummitarea_ml.nc')
+esfiles = file_search('/gws/nopw/j04/ncas_radar_vol2/data/ICECAPSarchive/ecmwf/ecmwf_oper_*12to36_greenlandsummitarea_sl.nc')
 
 esdate = strmid(esfiles,41,8)
 edate = strmid(efiles,41,8)
