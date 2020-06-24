@@ -29,7 +29,7 @@ time = time_offset
 
 ;create the ncdf filename
 name = string(format='(A,A,I0,I2.2,I2.2,A,3(I2.2),A)', $
-	'/psd3data/arctic/summit/mergesonde/nomwrstatret/', $
+	'/gws/nopw/j04/ncas_radar_vol1/heather/mergesonde/nomwrstatret/', $
 	'smtmergesondeX1.a1.',yyyy[0],mm[0],dd[0],'.',hh[0],nn[0],ss[0],'.cdf')
 
 comment1 = "Location: Summit Camp, Greenland. Measurements made by the ICECAPS project. Modeled data from ECMWF forecasts."
