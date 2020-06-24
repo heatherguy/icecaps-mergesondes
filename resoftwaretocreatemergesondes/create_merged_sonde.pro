@@ -33,7 +33,7 @@ pro create_merged_sonde,yyyymmdd,nosonde,stime,temp,rh,dpt,pres,wspd,wdir,t_inte
 
 
 ;find the radiosonde files around that day
-sfiles = file_search('/psd3data/arctic/summit/radiosonde/processed/smtsondewnpnX1*.cdf',count=scount)
+sfiles = file_search('/gws/nopw/j04/ncas_radar_vol2/data/ICECAPSarchive/radiosonde/processed/smtsondewnpnX1*.cdf',count=scount)
 
 
 stime=strmid(sfiles,63,15)
