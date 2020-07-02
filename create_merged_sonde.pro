@@ -36,7 +36,7 @@ pro create_merged_sonde,yyyymmdd,nosonde,stime,temp,rh,dpt,pres,wspd,wdir,t_inte
 sfiles = file_search('/gws/nopw/j04/ncas_radar_vol2/data/ICECAPSarchive/radiosonde/processed/smtsondewnpnX1*.cdf',count=scount)
 
 
-stime=strmid(sfiles,63,15)
+stime=strmid(sfiles,89,15)
 ;get the sonde time components. year,month,day, hour, min
 sdate=fix(strmid(stime,0,8),type=3)
 syyyy=fix(strmid(stime,0,4))
