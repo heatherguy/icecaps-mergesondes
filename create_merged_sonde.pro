@@ -211,7 +211,7 @@ if nosonde eq 1 then print, 'no file created for the day'+string(yyyymmdd) else 
  ;get water vapor mixing ratio g/kg
     for k=0,n_elements(sfilesday)-1 do begin
             goodrh = where(rh[k,*] ge 0.0 and rh[k,*] le 105.0)
-            mixr[k,goodrh] = rh2w(temp[k,goodrh],frh[k,goodrh],pres[k,goodrh],sonde_rh_err)
+            mixr[k,goodrh] = rh2w(temp[k,goodrh],frh[k,goodrh],pres[k,goodrh],/sonde_rh_err)
         endfor
 
 
