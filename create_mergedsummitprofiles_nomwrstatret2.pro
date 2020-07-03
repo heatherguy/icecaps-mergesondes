@@ -196,7 +196,7 @@ if keyword_set(mtemp_interp) eq 0 then print, 'no file created for this day' els
 ;mfiles = file_search('/psd3data/arctic/summit/mwr/mwrstattempret/smtmwrprof1millX1*.cdf',count=mcount)
 mfiles = file_search('/gws/nopw/j04/ncas_radar_vol1/heather/mwroe/smt10mwroe1turnC1.d1.*.cdf',count=mcount)
 
-mtime=strmid(mfiles,64,15)
+mtime=strmid(mfiles,65,15)
 ;get the time components. year,month,day, hour, min
 mdate=fix(strmid(mtime,0,8),type=3)
 ;mdate=fix(strmid(mtime,0,8),type=3) - 20100000l ; make with out MWRSTATRET
