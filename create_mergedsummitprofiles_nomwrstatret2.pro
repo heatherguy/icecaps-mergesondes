@@ -374,7 +374,7 @@ endif
 rfiles = file_search('/gws/nopw/j04/ncas_radar_vol1/heather/mwrret3/smtmwrret3turn*.cdf',count=rcount)
 
 ;rtime=strmid(rfiles,55,15)
-rtime=strmid(rfiles,53,15)
+rtime=strmid(rfiles,66,15)
 
 ;get the time components. year,month,day, hour, min
 rdate=fix(strmid(rtime,0,8),type=3)
