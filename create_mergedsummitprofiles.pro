@@ -1,6 +1,8 @@
 ;Nate Miller
 ;Jan - April 2014
 ;
+;Adapted by Heather Guy to incorporate mwroe, July 2020
+;
 ;some of the variables can be adjusted such as the time between
 ;sondes. ie. if the time between sondes is X hours and the time
 ;between sondes is  less than X there will onlt be a linear
@@ -191,36 +193,33 @@ if keyword_set(mtemp_interp) eq 0 then print, 'no file created for this day' els
 ;this is the end of the merging of the sondes and ECMWF modeled
 ;temperature data
 
-;next merge in the MWRSTATRET data and the MWRRET data. 
-;find the mwrstatret files around that day
-mfiles = file_search('/psd3data/arctic/summit/mwr/mwrstattempret/smtmwrprof1millX1*.cdf',count=mcount)
+;next merge in the mwroe data and the MWRRET data. 
+;find the mwroe files around that day
+mfiles = file_search('/gws/nopw/j04/ncas_radar_vol1/heather/mwroe/smt10mwroe1turnC1.d1.*.cdf',count=mcount)
 
-mtime=strmid(mfiles,64,15)
+mtime=strmid(mfiles,65,15)
 
 
 ;get the time components. year,month,day, hour, min
 mdate=fix(strmid(mtime,0,8),type=3)
-;mdate=fix(strmid(mtime,0,8),type=3) - 20100000l ; make with out MWRSTATRET
-
 
 
 ;mwrstatretfiles during the day, plus adjacent files
 museday = where(mdate eq yyyymmdd)
 
-
-create_merged_statret,yyyymmdd,nomwrstatret,stattime,stattemp,statt_interp,stattemp_interp,statheight
+create_merged_mwroe,yyyymmdd,nomwroe,stattime,stattemp,statt_interp,stattemp_interp,statheight
 
 ;amount of time (seconds) to linearly decease the sonde weighting to zero
 window_sonde = 5.0 * 60.0 * 60.0
-;top index of the fully weighted mwrstatret, 100 =2 km
+;top index of the fully weighted mwroe, 100 =2 km
 tindex = 100
-;number of points above the mwrstatret to merge, 124 = 2.5km
+;number of points above the mwroe to merge, 124 = 2.5km
 nabove = 25
 
-;replace the information below 2.0km with sonde and mwrstatret values
-;think about how to deal with incomplete mwrstatret days
+;replace the information below 2.0km with sonde and mwroe values
+;think about how to deal with incomplete mwroe days
 ;assume that theya  are full? have minumum # of times?
-if nomwrstatret eq 0 then begin ; there is data
+if nomwroe eq 0 then begin ; there is data
 
  
     stattheday = where(stattime ge 0. and stattime le (86340.))
@@ -282,7 +281,7 @@ if nomwrstatret eq 0 then begin ; there is data
 
     endif  
          
-    ;fillin the rest of the data with mwrstatret values below 2km
+    ;fillin the rest of the data with mwroe values below 2km
      onlytheday = where(stime ge 0.0 and stime le (86340))
      for j = 0,n_elements(statheight[0:tindex])-1 do begin
         
@@ -371,9 +370,9 @@ endif
 
 ;rtime=strmid(rfiles,55,15)
 ;find the mwrret3 files around that day
-rfiles = file_search('/psd3data/arctic/summit/mwr/mwrret3/smtmwrret3turn*.cdf',count=rcount)
+rfiles = file_search('/gws/nopw/j04/ncas_radar_vol1/heather/mwrret3/smtmwrret3turn*.cdf',count=rcount)
 
-rtime=strmid(rfiles,56,15)
+rtime=strmid(rfiles,66,15)
 ;get the time components. year,month,day, hour, min
 rdate=fix(strmid(rtime,0,8),type=3)
 ryyyy=fix(strmid(rtime,0,4))
