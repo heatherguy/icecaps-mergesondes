@@ -1,5 +1,6 @@
-;Nate Miller
-;Nov 2013
+;Heather Guy
+;July 2020
+;(Adapted from create_merged_statret.pro by Nate Miller)
 ;
 ;input: date in the form yyyymmdd
 ;
@@ -9,8 +10,8 @@
 ;
 ;output:
 ;
-;nostatret = 1 if no data, = 0 if there is a stat retrieval for the day
-;mtime = time (sec) of the mwrstatret
+;nomwroe = 1 if no data, = 0 if there is a mwroe retrieval for the day
+;mtime = time (sec) of the mwroe
 ;mtemp = temp profiles interpolated to height grid
 ;t_interp = time (sec) for the time fully interpolated profiles 
 ;temp_interp = temperature interpolated to time and height grid
@@ -18,14 +19,13 @@
 ;
 
 
-pro create_merged_statret,yyyymmdd,nomwrstatret,mtime,mtemp,t_interp,temp_interp,height
+pro create_merged_mwroe,yyyymmdd,nomwroe,mtime,mtemp,t_interp,temp_interp,height
 
 
 
-;find the mwrstatret files around that day
-mfiles = file_search('/psd3data/arctic/summit/mwr/mwrstattempret/smtmwrprof1millX1*.cdf',count=mcount)
-
-mtime=strmid(mfiles,64,15)
+;find the mwroe files around that day
+mfiles = file_search('/gws/nopw/j04/ncas_radar_vol1/heather/mwroe/smt10mwroe1turnC1.d1.*.cdf',count=mcount)
+mtime=strmid(mfiles,65,15)
 ;get the time components. year,month,day, hour, min
 mdate=fix(strmid(mtime,0,8),type=3)
 myyyy=fix(strmid(mtime,0,4))
@@ -37,21 +37,21 @@ mss=fix(strmid(mtime,13,2))
 ymdhms2julian,myyyy,mmm,mdd,mhh,mnn,mss,mjtime
 
 
-;mwrstatretfiles during the day, plus adjacent files
+;mwroe during the day, plus adjacent files
 museday = where(mdate eq yyyymmdd)
 if total(museday) lt 0 then begin
-    print,'no mwrstatret files for this day'
-    nomwrstatret = 1
+    print,'no mwroe files for this day'
+    nomwroe = 1
     endif else begin
     mfilesday = mfiles[museday-1:museday+1]
     nmday = n_elements(mfilesday)
-    nomwrstatret = 0
+    nomwroe = 0
 endelse
 
 
 
 
-if nomwrstatret eq 1 then print, 'no file created for the day'+string(yyyymmdd) else begin
+if nomwroe eq 1 then print, 'no file created for the day'+string(yyyymmdd) else begin
 
     height = [0.000, 0.020, 0.040, 0.060, 0.080, 0.100, 0.120, 0.140, 0.160, $
     0.180, 0.200, 0.220, 0.240, 0.260, 0.280, 0.300, 0.320, 0.340, 0.360, $
@@ -94,8 +94,13 @@ if nomwrstatret eq 1 then print, 'no file created for the day'+string(yyyymmdd) 
     for i = 0,n_elements(mfilesday)-1 do begin
         ncdf_read_structure,mfilesday[i],mcurrent
         btime_curr = mcurrent.base_time
-        alt_curr   = (mcurrent.height)/1000.0
-        temp_curr   = mcurrent.temp_bc
+        
+        ; altitude is in km agl
+        alt_curr   = (mcurrent.height)
+
+
+        temp_curr   = mcurrent.temperature
+        
                                 ;the time (sec) with respect to the
                                 ;day
         time_offset_curr = mcurrent.time_offset + btime_curr - basetime
