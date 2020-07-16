@@ -35,11 +35,11 @@ time = time_offset
 
 ;create the ncdf filename
 name = string(format='(A,A,I0,I2.2,I2.2,A,3(I2.2),A)', $
-	'/psd3data/arctic/summit/mergesonde/', $
+	'//gws/nopw/j04/ncas_radar_vol1/heather/mergesonde/merged-mwroe/', $
 	'smtmergesondeX1.a1.',yyyy[0],mm[0],dd[0],'.',hh[0],nn[0],ss[0],'.cdf')
 
 comment1 = "Location: Summit Camp, Greenland. Measurements made by the ICECAPS project. Modeled data from ECMWF forecasts."
-glatt = ['Contact = Nate Miller (millernb@colorado.edu), Matthew Shupe (matthew.shupe@noaa.gov)']
+glatt = ['Contact = Heather Guy (heather.guy@ncas.ac.uk), Nate Miller (millernb@colorado.edu), Matthew Shupe (matthew.shupe@noaa.gov)']
 created = string('date this NetCDF file was created was ',systime())
 glatt = [comment1,glatt, created]
 
@@ -81,7 +81,7 @@ vid = ncdf_vardef(fid,'base_time',/long)
     ncdf_attput,fid,vid,'units','km MSL'
 
  vid = ncdf_vardef(fid,'temp_merge',[did,did2],/float)
-    ncdf_attput,fid,vid,'long_name','Merged ECMWF, radiosone and MWRSTATRET temperature profiles'
+    ncdf_attput,fid,vid,'long_name','Merged ECMWF, radiosone and MWROE temperature profiles'
     ncdf_attput,fid,vid,'units','Celsius'
 
  vid = ncdf_vardef(fid,'mixr_merge',[did,did2],/float)
@@ -106,7 +106,7 @@ vid = ncdf_vardef(fid,'base_time',/long)
     ncdf_attput,fid,vid,'units','0-1'
 
  vid = ncdf_vardef(fid,'stat_w_temp',[did,did2],/float)
-    ncdf_attput,fid,vid,'long_name','Weight of MWRSTATRET contribution to merged temperature profiles'
+    ncdf_attput,fid,vid,'long_name','Weight of MWROE contribution to merged temperature profiles'
     ncdf_attput,fid,vid,'units','0-1'
 
  vid = ncdf_vardef(fid,'sonde_w_temp',[did,did2],/float)
