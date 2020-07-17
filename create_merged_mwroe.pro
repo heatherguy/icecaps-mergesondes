@@ -53,6 +53,7 @@ endelse
 
 if nomwroe eq 1 then print, 'no file created for the day'+string(yyyymmdd) else begin
 
+    ; output heights in km asl
     height = [0.000, 0.020, 0.040, 0.060, 0.080, 0.100, 0.120, 0.140, 0.160, $
     0.180, 0.200, 0.220, 0.240, 0.260, 0.280, 0.300, 0.320, 0.340, 0.360, $
     0.380, 0.400, 0.420, 0.440, 0.460, 0.480, 0.500, 0.520, 0.540, 0.560, $
@@ -65,7 +66,8 @@ if nomwroe eq 1 then print, 'no file created for the day'+string(yyyymmdd) else 
     1.780, 1.800, 1.820, 1.840, 1.860, 1.880, 1.900, 1.920, 1.940, 1.960, $
     1.980, 2.000, 2.020, 2.040, 2.060, 2.080, 2.100, 2.120, 2.140, 2.160, $
     2.180, 2.200, 2.220, 2.240, 2.260, 2.280, 2.300, 2.320, 2.340, 2.360, $
-    2.380, 2.400, 2.420, 2.440, 2.460, 2.480, 2.500];, 2.520, 2.540, 2.560, $
+    2.380, 2.400, 2.420, 2.440, 2.460, 2.480, 2.500]
+  ;, 2.520, 2.540, 2.560, $
   ;  2.580, 2.600, 2.620, 2.640, 2.660, 2.680, 2.700, 2.720, 2.740, 2.760, $
   ;  2.780, 2.800, 2.820, 2.840, 2.860, 2.880, 2.900, 2.920, 2.940, 2.960, $
   ;  2.980, 3.000, 3.050, 3.100, 3.150, 3.200, 3.250, 3.300, 3.350, 3.400, $
@@ -95,8 +97,8 @@ if nomwroe eq 1 then print, 'no file created for the day'+string(yyyymmdd) else 
         ncdf_read_structure,mfilesday[i],mcurrent
         btime_curr = mcurrent.base_time
         
-        ; altitude is in km agl
-        alt_curr   = (mcurrent.height)
+        ; altitude is in km agl - convert to km asl
+        alt_curr   = (mcurrent.height) + (3.255)
 
 
         temp_curr   = mcurrent.temperature
